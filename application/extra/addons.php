@@ -8,9 +8,11 @@ return [
         ],
         'app_init' => [
             'cms',
+            'miniform',
         ],
         'view_filter' => [
             'cms',
+            'third',
         ],
         'user_sidenav_after' => [
             'cms',
@@ -20,6 +22,21 @@ return [
         ],
         'xunsearch_index_reset' => [
             'cms',
+        ],
+        'user_delete_successed' => [
+            'third',
+        ],
+        'user_logout_successed' => [
+            'third',
+        ],
+        'module_init' => [
+            'third',
+        ],
+        'action_begin' => [
+            'third',
+        ],
+        'config_init' => [
+            'third',
         ],
     ],
     'route' => [
@@ -34,6 +51,11 @@ return [
         '/u/[:id]' => 'cms/user/index',
         '/cms/[:diyname]$' => 'cms/channel/index',
         '/cms/[:catename]/[:id]$' => 'cms/archives/index',
+        '/third$' => 'third/index/index',
+        '/third/connect/[:platform]' => 'third/index/connect',
+        '/third/callback/[:platform]' => 'third/index/callback',
+        '/third/bind/[:platform]' => 'third/index/bind',
+        '/third/unbind/[:platform]' => 'third/index/unbind',
     ],
     'priority' => [],
     'domain' => '',

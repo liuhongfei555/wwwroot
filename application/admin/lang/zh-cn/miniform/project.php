@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'Title'             => '标题',
+    'Images'            => '图片组',
+    'Category_id'       => '分类',
+    'Table'             => '表单名',
+    'People_num'        => '人数',
+    'Price'             => '价格',
+    'Views'             => '浏览数',
+    'Registered'        => '成功提交人数',
+    'Is_multi'          => '是否可多次提交',
+    'Is_signin'         => '是否签到',
+    'Is_verification'   => '是否开启核销',
+    'Signin_time'       => '签到时间',
+    'Signin_name'       => '签到地点',
+    'Expired'           => '已结束',
+    'Content'           => '内容',
+    'Front_back'        => '详情靠前或靠后',
+    'Front'             => '靠前',
+    'Back'              => '靠后',
+    'IsNeedLogin'       => '是否需要登录',
+    'Iscaptcha'         => '是否开启验证码',
+    'Label'             => '标签名称',
+    'Begintime'         => '项目开始时间',
+    'Endtime'           => '项目结束时间',
+    'Createtime'        => '添加时间',
+    'Updatetime'        => '更新时间',
+    'Status'            => '状态'
+];

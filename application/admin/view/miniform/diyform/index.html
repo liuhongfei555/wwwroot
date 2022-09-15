@@ -1,0 +1,60 @@
+<div class="panel panel-default panel-intro">
+
+    <div class="panel-heading">
+        {:build_heading(null,FALSE)}
+        <ul class="nav nav-tabs" data-field="status">
+            <li class="{:$Think.get.status === null ? 'active' : ''}"><a href="#t-all" data-value="" data-toggle="tab">{:__('All')}</a></li>
+            {foreach name="statusList" item="vo"}
+            {php}if(in_array($key, ['nonpayment', 'paid']) && $project['price']==0) continue;{/php}
+            <li class="{:$Think.get.status === (string)$key ? 'active' : ''}"><a href="#t-{$key}" data-value="{$key}" data-toggle="tab">{$vo}</a></li>
+            {/foreach}
+        </ul>
+    </div>
+
+
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="one">
+                <div class="widget-body no-padding">
+                    <div id="toolbar" class="toolbar">
+                        <a href="javascript:;" class="btn btn-primary btn-refresh" title="{:__('Refresh')}"><i class="fa fa-refresh"></i> </a>
+                        <a href="javascript:;" class="btn btn-success btn-edit btn-disabled disabled {:$auth->check('miniform/diyform/edit')?'':'hide'}" title="{:__('Edit')}"><i class="fa fa-pencil"></i> {:__('Edit')}</a>
+                        <a href="javascript:;" class="btn btn-danger btn-del btn-disabled disabled {:$auth->check('miniform/diyform/del')?'':'hide'}" title="{:__('Delete')}"><i class="fa fa-trash"></i> {:__('Delete')}</a>
+                        {if $is_verification}
+                        <a href="javascript:;" class="btn btn-primary btn-verification {:$auth->check('miniform/diyform/verification')?'':'hide'}" title="{:__('Verification')}"><i class="fa fa-qrcode"></i> {:__('Verification')}</a>
+                        {/if}
+                    </div>
+                    <table id="table" class="table table-striped table-bordered table-hover table-nowrap"
+                           data-operate-edit="{:$auth->check('miniform/diyform/edit')}"
+                           data-operate-del="{:$auth->check('miniform/diyform/del')}"
+                           width="100%">
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="verificationtpl">
+    <div id="verificationdom" style="padding:15px;">
+
+        <div class="form-group">
+            <label for="">核销码</label>
+            <input type="text" class="form-control input-lg" name="code" id="code" placeholder="请手动输入或使用扫码器扫码录入">
+        </div>
+
+        <div class="form-group">
+            <label for="autosubmit">自动提交</label>
+            <div>
+                <input type="checkbox" name="autosubmit" id="autosubmit" value="1"> 勾选后将无需手动点击确认按钮
+            </div>
+        </div>
+
+        <div class="hidden" id="reader"></div>
+    </div>
+</script>
+
+{if isset($camera_qrcode) && $camera_qrcode}
+<script type="text/javascript" src="__CDN__/assets/addons/miniform/js/html5-qrcode.min.js"></script>
+{/if}

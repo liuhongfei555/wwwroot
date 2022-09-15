@@ -1,0 +1,184 @@
+<form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Title')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-title" class="form-control" data-rule="required" name="row[title]" type="text" value="{$row.title|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Table')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-table" class="form-control" data-rule="required,minizm" data-rule-minizm="[/^[a-z]+$/, '只能输入小写字母']" data-tip="表单名字，只能输入小写字母" name="row[table]" type="text" readonly value="{$row.table|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Label')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-label" class="form-control" data-rule="required" name="row[label]" type="text" value="{$row.label}" data-tip="标签名称">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Category_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-category_id" data-rule="required" data-source="miniform/category/index" data-field="name" class="form-control selectpage" name="row[category_id]" type="text" value="{$row.category_id}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('People_num')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-people_num" class="form-control" data-rule="required" name="row[people_num]" type="number" value="{$row.people_num|htmlentities}" data-tip="人数，0为不限制">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Price')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-price" class="form-control" data-rule="required" name="row[price]" type="number" value="{$row.price|htmlentities}" data-tip="价格，0为免费">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Is_multi')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input  id="c-switch" name="row[is_multi]" type="hidden" value="{$row.is_multi|htmlentities}">
+            <a href="javascript:;" data-toggle="switcher" class="btn-switcher" data-input-id="c-switch" data-yes="1" data-no="0" >
+                <i class="fa fa-toggle-on text-success {eq name="$row.is_multi" value="0"}fa-flip-horizontal text-gray{/eq} fa-2x"></i>
+            </a>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Front_back')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="radio">
+            {foreach name="front_back_list" item="vo"}
+            <label for="row[front_back]-{$key}">
+                <input id="row[front_back]-{$key}" name="row[front_back]" type="radio" value="{$key}" {in name="key" value="$row.front_back"}checked{/in} />
+                 {$vo}
+            </label>
+            {/foreach}
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Images')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group">
+                <input id="c-image" class="form-control" data-rule="required" size="50" name="row[images]" type="text" value="{$row.images|htmlentities}">
+                <div class="input-group-addon no-border no-padding">
+                    <span><button type="button" id="faupload-image" class="btn btn-danger faupload" data-input-id="c-image" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp,image/webp" data-multiple="true" data-preview-id="p-image"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                    <span><button type="button" id="fachoose-image" class="btn btn-primary fachoose" data-input-id="c-image" data-mimetype="image/*" data-multiple="true"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                </div>
+                <span class="msg-box n-right" for="c-image"></span>
+            </div>
+            <ul class="row list-inline faupload-preview" id="p-image"></ul>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Content')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea id="c-content" class="form-control editor" rows="5" name="row[content]" cols="50">{$row.content|htmlentities}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Begintime')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-begintime" class="form-control datetimepicker" data-date-format="YYYY-MM-DD HH:mm:ss" data-use-current="true" name="row[begintime]" type="text" value="{:$row.begintime?datetime($row.begintime):''}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Endtime')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-endtime" class="form-control datetimepicker" data-date-format="YYYY-MM-DD HH:mm:ss" data-use-current="true" name="row[endtime]" type="text" value="{:$row.endtime?datetime($row.endtime):''}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Is_verification')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-is_verification" name="row[is_verification]" type="hidden" value="{$row.is_verification|default=0}">
+            <a href="javascript:;" data-toggle="switcher" class="btn-switcher" data-input-id="c-is_verification" data-yes="1" data-no="0">
+                <i class="fa fa-toggle-on text-success {eq name="$row.is_verification" value="0"}fa-flip-horizontal text-gray{/eq} fa-2x"></i>
+            </a>
+        </div>
+    </div>
+    <div class="form-group {:$row['price']==0?'':'hide'}" data-type="needlogin">
+        <label class="control-label col-xs-12 col-sm-2">{:__('IsNeedLogin')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-is_need_login" name="row[is_need_login]" type="hidden" value="{$row.is_need_login|default=0}">
+            <a href="javascript:;" data-toggle="switcher" class="btn-switcher {if $row.price>0||$row.is_verification||$row.is_signin}disabled{/if}" data-input-id="c-is_need_login" data-yes="1" data-no="0">
+                <i class="fa fa-toggle-on text-success {eq name="$row.is_need_login" value="0"}fa-flip-horizontal text-gray{/eq} fa-2x"></i>
+            </a>
+            <br>
+            <span class="text-muted">只有同时满足免费报名、未开启核销、未开启签到的项目才能设定是否需要登录</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Iscaptcha')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-iscaptcha" name="row[iscaptcha]" type="hidden" value="{$row.iscaptcha|default=0}">
+            <a href="javascript:;" data-toggle="switcher" class="btn-switcher" data-input-id="c-iscaptcha" data-yes="1" data-no="0">
+                <i class="fa fa-toggle-on text-success {eq name="$row.iscaptcha" value="0"}fa-flip-horizontal text-gray{/eq} fa-2x"></i>
+            </a>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Is_signin')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-is_signin" name="row[is_signin]" type="hidden" value="{$row.is_signin|default=0}">
+            <a href="javascript:;" data-toggle="switcher" class="btn-switcher" data-input-id="c-is_signin" data-yes="1" data-no="0">
+                <i class="fa fa-toggle-on text-success {eq name="$row.is_signin" value="0"}fa-flip-horizontal text-gray{/eq} fa-2x"></i>
+            </a>
+        </div>
+    </div>
+    <div class="form-group {:$row['is_signin']?'':'hide'}" data-type="signin">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Signin_time')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-signin_time" class="form-control datetimerange" name="row[signin_time]" type="text" value="{$row.signin_time|default=''}">
+        </div>
+    </div>
+
+    <div class="form-group {:$row['is_signin']?'':'hide'}" data-type="signin">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Signin_name')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="input-group input-groupp-md" style="margin-bottom:10px;">
+                        <input type="text" name="row[signin_name][address]" id="c-signin_name-address" value="{$row.signin_name.address|default=''}" placeholder="如果选择定位不准确，可手动输入地址" class="form-control"/>
+                        <a href="javascript:" class="btn-search-icon input-group-addon" data-toggle='addresspicker' data-input-id="c-signin_name-address" data-lng-id="c-signin_name-lng" data-lat-id="c-signin_name-lat" data-addon="{:get_addon_info('address')?1:0}">选择定位</a>
+                    </div>
+                </div>
+                <div class="col-xs-6"><input type="number" name="row[signin_name][lat]" id="c-signin_name-lat" value="{$row.signin_name.lat|default=''}" placeholder="纬度，如果定位不准，可手工输入" class="form-control"/></div>
+                <div class="col-xs-6"><input type="number" name="row[signin_name][lng]" id="c-signin_name-lng" value="{$row.signin_name.lng|default=''}" placeholder="经度，如果定位不准，可手工输入" class="form-control"/></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Status')}:</label>
+        <div class="col-xs-12 col-sm-8">
+
+            <div class="radio">
+            {foreach name="statusList" item="vo"}
+            <label for="row[status]-{$key}"><input id="row[status]-{$key}" name="row[status]" type="radio" value="{$key}" {in name="key" value="$row.status"}checked{/in} /> {$vo}</label>
+            {/foreach}
+            </div>
+
+        </div>
+    </div>
+
+    {if !empty($fields)}
+    <hr>
+    <div class="form-group">
+        <div class="text-center">自定义数据</div>
+    </div>
+    {/if}
+    <!-- 渲染自定义字段 -->
+    {include file="miniform/common/fields"}
+
+
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-primary btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>
