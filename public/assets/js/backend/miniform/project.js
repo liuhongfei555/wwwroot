@@ -59,7 +59,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                     },
                                     'icon': 'fa fa-edit',
                                     'text': '项目字段',
-                                    'classname': 'btn btn-xs btn-warning btn-dialog',
+                                    'classname': 'btn btn-xs btn-warning btn-dialog', 
                                     'url': 'miniform/fields/index/source/project/source_id/{ids}',
                                     'extend': 'data-area=\'["80%","80%"]\''
                                 }, {

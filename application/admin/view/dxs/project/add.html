@@ -1,0 +1,272 @@
+<form id="add-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+    <div class="panel panel-default panel-intro">
+        <div class="panel-heading">
+            <ul class="nav nav-tabs nav-group">
+                <li class="active"><a href="#basics" data-toggle="tab">基础信息</a></li>
+                <li><a href="#intro" data-toggle="tab">内容信息</a></li>
+                <li><a href="#group" data-toggle="tab">分组信息</a></li>
+                <li><a href="#score" data-toggle="tab">成绩信息</a></li>
+                <li><a href="#other" data-toggle="tab">其他信息</a></li>
+
+            </ul>
+        </div>
+        <div class="panel-body">
+            <div id="myTabContent" class="tab-content">
+
+                <div class="tab-pane fade active in" id="basics">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Title')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <input id="c-title" data-rule="required" class="form-control" name="row[title]" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Status')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+
+                            <div class="radio">
+                                {foreach name="statusList" item="vo"}
+                                <label for="row[status]-{$key}"><input id="row[status]-{$key}" name="row[status]"
+                                        type="radio" value="{$key}" {in name="key" value="1" }checked{/in} />
+                                    {$vo}</label>
+                                {/foreach}
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Showswitch')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+
+                            <input id="c-showswitch" name="row[showswitch]" type="hidden" value="0">
+                            <a href="javascript:;" data-toggle="switcher" class="btn-switcher"
+                                data-input-id="c-showswitch" data-yes="1" data-no="0">
+                                <i class="fa fa-toggle-on text-success fa-flip-horizontal text-gray fa-2x"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Matchdate')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <input id="c-matchdate" class="form-control datetimepicker" data-date-format="YYYY-MM-DD"
+                                data-use-current="true" name="row[matchdate]" type="text" value="{:date('Y-m-d')}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Enter_begintime')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <input id="c-enter_begintime" class="form-control datetimepicker"
+                                data-date-format="YYYY-MM-DD HH:mm:ss" data-use-current="true"
+                                name="row[enter_begintime]" type="text" value="{:date('Y-m-d H:i:s')}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Enter_endtime')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <input id="c-enter_endtime" class="form-control datetimepicker"
+                                data-date-format="YYYY-MM-DD HH:mm:ss" data-use-current="true" name="row[enter_endtime]"
+                                type="text" value="{:date('Y-m-d H:i:s')}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Limit')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <input id="c-limit" class="form-control" name="row[limit]" type="number">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Virtual_num')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <input id="c-virtual_num" class="form-control" name="row[virtual_num]" type="number"
+                                value="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Coverimage')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <div class="input-group">
+                                <input id="c-coverimage" class="form-control" size="50" name="row[coverimage]"
+                                    type="text">
+                                <div class="input-group-addon no-border no-padding">
+                                    <span><button type="button" id="faupload-coverimage" class="btn btn-danger faupload"
+                                            data-input-id="c-coverimage"
+                                            data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp,image/webp"
+                                            data-multiple="false" data-preview-id="p-coverimage"><i
+                                                class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                                    <span><button type="button" id="fachoose-coverimage"
+                                            class="btn btn-primary fachoose" data-input-id="c-coverimage"
+                                            data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i>
+                                            {:__('Choose')}</button></span>
+                                </div>
+                                <span class="msg-box n-right" for="c-coverimage"></span>
+                            </div>
+                            <ul class="row list-inline faupload-preview" id="p-coverimage"></ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Price')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <input id="c-price" class="form-control" step="0.01" name="row[price]" type="number"
+                                value="0.00">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Onlinepayswitch')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+
+                            <input id="c-onlinepayswitch" name="row[onlinepayswitch]" type="hidden" value="0">
+                            <a href="javascript:;" data-toggle="switcher" class="btn-switcher"
+                                data-input-id="c-onlinepayswitch" data-yes="1" data-no="0">
+                                <i class="fa fa-toggle-on text-success fa-flip-horizontal text-gray fa-2x"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="intro">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Intro')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <textarea id="c-intro" class="form-control " rows="5" name="row[intro]"
+                                cols="50">这是一场有趣的赛事</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Content')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <textarea id="c-content" class="form-control editor" rows="5" name="row[content]"
+                                cols="50"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Notice')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <textarea id="c-notice" class="form-control " rows="5" name="row[notice]"
+                                cols="50"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Agreement')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <textarea id="c-agreement" class="form-control " rows="5" name="row[agreement]"
+                                cols="50"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="group">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Groupswitch')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+
+                            <input id="c-groupswitch" name="row[groupswitch]" type="hidden" value="0">
+                            <a href="javascript:;" data-toggle="switcher" class="btn-switcher"
+                                data-input-id="c-groupswitch" data-yes="1" data-no="0">
+                                <i class="fa fa-toggle-on text-success fa-flip-horizontal text-gray fa-2x"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="form-group" data-favisible="groupswitch=1">
+                        <label class="control-label col-xs-12 col-sm-2">
+                            <!--{:__('Groupjson')}:-->
+                        </label>
+                        <div class="col-xs-12 col-sm-8">
+
+                            <dl class="fieldlist" data-name="row[groupjson]" data-template="row[groupjson]tpl">
+                                <dd>
+                                    <ins>组代码</ins>
+                                    <ins>名称</ins>
+                                    <ins>招募队伍数</ins>
+                                    <ins>最少队员数</ins>
+                                    <ins>最多队员数</ins>
+                                    <ins>{:__('Operate')}</ins>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;" class="btn btn-sm btn-success btn-append">
+                                        <i class="fa fa-plus"></i> {:__('Append')}</a>
+                                </dd>
+                                <textarea name="row[groupjson]" class="form-control hide" cols="30" rows="5"></textarea>
+                            </dl>
+                            <script type="text/html" id="row[groupjson]tpl">
+                <dd class="form-inline">
+                    <input type="text" name="row[<%=name%>][<%=index%>][groupcode]" class="form-control" value="<%=row['groupcode']%>" size="5"> 
+                    <input type="text" name="row[<%=name%>][<%=index%>][title]" class="form-control" value="<%=row['title']%>" size="10"> 
+                    <input type="text" name="row[<%=name%>][<%=index%>][limit]" class="form-control" value="<%=row['limit']%>" size="10"> 
+                    <input type="text" name="row[<%=name%>][<%=index%>][membermin]" class="form-control" value="<%=row['membermin']%>" size="10"> 
+                    <input type="text" name="row[<%=name%>][<%=index%>][membermax]" class="form-control" value="<%=row['membermin']%>" size="10"> 
+                    <span class="btn btn-sm btn-danger btn-remove"><i class="fa fa-times"></i></span> <span class="btn btn-sm btn-primary btn-dragsort"><i class="fa fa-arrows"></i></span>
+                </dd>
+            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="score">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Scorebgimage')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <div class="input-group">
+                                <input id="c-scorebgimage" class="form-control" size="50" name="row[scorebgimage]"
+                                    type="text">
+                                <div class="input-group-addon no-border no-padding">
+                                    <span><button type="button" id="faupload-scorebgimage"
+                                            class="btn btn-danger faupload" data-input-id="c-scorebgimage"
+                                            data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp,image/webp"
+                                            data-multiple="false" data-preview-id="p-scorebgimage"><i
+                                                class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                                    <span><button type="button" id="fachoose-scorebgimage"
+                                            class="btn btn-primary fachoose" data-input-id="c-scorebgimage"
+                                            data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i>
+                                            {:__('Choose')}</button></span>
+                                </div>
+                                <span class="msg-box n-right" for="c-scorebgimage"></span>
+                            </div>
+                            <ul class="row list-inline faupload-preview" id="p-scorebgimage"></ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Scoretime')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <input id="c-scoretime" class="form-control datetimepicker"
+                                data-date-format="YYYY-MM-DD HH:mm:ss" data-use-current="true" name="row[scoretime]"
+                                type="text" value="{:date('Y-m-d H:i:s')}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Scoreposjson')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+
+                            <dl class="fieldlist" data-name="row[scoreposjson]">
+                                <dd>
+                                    <ins>{:__('Key')}</ins>
+                                    <ins>{:__('Value')}</ins>
+                                </dd>
+                                <dd><a href="javascript:;" class="btn btn-sm btn-success btn-append"><i
+                                            class="fa fa-plus"></i> {:__('Append')}</a></dd>
+                                <textarea name="row[scoreposjson]" class="form-control hide" cols="30"
+                                    rows="5"></textarea>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2">{:__('Scoreswitch')}:</label>
+                        <div class="col-xs-12 col-sm-8">
+
+                            <input id="c-scoreswitch" name="row[scoreswitch]" type="hidden" value="0">
+                            <a href="javascript:;" data-toggle="switcher" class="btn-switcher"
+                                data-input-id="c-scoreswitch" data-yes="1" data-no="0">
+                                <i class="fa fa-toggle-on text-success fa-flip-horizontal text-gray fa-2x"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-primary btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

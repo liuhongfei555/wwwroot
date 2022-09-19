@@ -5,6 +5,7 @@ return [
     'hooks' => [
         'upgrade' => [
             'cms',
+            'simditor',
         ],
         'app_init' => [
             'cms',
@@ -23,6 +24,10 @@ return [
         'xunsearch_index_reset' => [
             'cms',
         ],
+        'config_init' => [
+            'simditor',
+            'third',
+        ],
         'user_delete_successed' => [
             'third',
         ],
@@ -33,9 +38,6 @@ return [
             'third',
         ],
         'action_begin' => [
-            'third',
-        ],
-        'config_init' => [
             'third',
         ],
     ],
@@ -51,6 +53,10 @@ return [
         '/u/[:id]' => 'cms/user/index',
         '/cms/[:diyname]$' => 'cms/channel/index',
         '/cms/[:catename]/[:id]$' => 'cms/archives/index',
+        '/example$' => 'example/index/index',
+        '/example/d/[:name]' => 'example/demo/index',
+        '/example/d1/[:name]' => 'example/demo/demo1',
+        '/example/d2/[:name]' => 'example/demo/demo2',
         '/third$' => 'third/index/index',
         '/third/connect/[:platform]' => 'third/index/connect',
         '/third/callback/[:platform]' => 'third/index/callback',
